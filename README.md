@@ -1,4 +1,4 @@
-# docker-nginx-php-fpm
+# docker-nginx-php7.1-fpm
 Docker: Nginx + PHP-FPM + ssmtp-proxy + cron (via supervisord)
 
 ## Build
