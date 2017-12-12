@@ -18,5 +18,5 @@ $ docker logs -f webserver01
 
 ## Volume
 ```
-$ docker run -d --name webserver01 -p 8000:80 -v /data/www:/srv/www/php-app/htdocs nginx-php
+$ docker run -d --name webserver01 -p 8000:80 -v /data/www:/var/www/ nginx-php
 ```

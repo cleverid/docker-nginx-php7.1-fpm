@@ -1,0 +1,6 @@
+app:
+  build: .
+  ports:
+    - 14000:80
+  environment:
+    NGINX_VERSION: 1.10.2-1~jessie

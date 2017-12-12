@@ -1,14 +1,14 @@
-FROM php:5.6-fpm
-MAINTAINER scoutm33@ya.ru
+FROM php:7.1.12-fpm
 
 # Variables
 ENV TERM=xterm
 ENV NGINX_VERSION 1.10.2-1~jessie
 
 # Packages installation
-RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 && \
-  echo "deb http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list && \
-  apt-get update && apt-get install -y \
+RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62
+RUN echo "deb http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get install -y \
     curl \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
@@ -20,11 +20,6 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC64107
     g++ \
     ca-certificates \
     nginx=${NGINX_VERSION} \
-    nginx-module-xslt \
-    nginx-module-geoip \
-    nginx-module-image-filter \
-    nginx-module-perl \
-    nginx-module-njs \
     gettext-base \
     supervisor \
     ssmtp \
@@ -39,7 +34,7 @@ RUN echo "Install php-ext..." \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && docker-php-ext-install mbstring \
-    && docker-php-ext-install mysql \
+    && docker-php-ext-install mysqli \
     && docker-php-ext-install pcntl \
     && docker-php-ext-configure intl && docker-php-ext-install intl \
     && docker-php-ext-install soap \
@@ -63,10 +58,10 @@ COPY conf/ssmtp.conf /etc/ssmtp/ssmtp.conf
 RUN chmod 644 /etc/cron.d/php-app-cronjob 
 
 # Application
-COPY . /srv/www/php-app
+COPY . /var/www/
 
 # fix permissions
-RUN chown -R www-data:www-data /srv/www/php-app/
+RUN chown -R www-data:www-data /var/www/
 
 EXPOSE 80
 
