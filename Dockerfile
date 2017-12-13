@@ -67,3 +67,4 @@ RUN chown -R www-data:www-data /var/www/
 EXPOSE 80
 
 ENTRYPOINT ["/bin/bash", "/cmd.sh"]
+
