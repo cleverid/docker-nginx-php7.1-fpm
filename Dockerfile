@@ -59,10 +59,11 @@ RUN chmod 644 /etc/cron.d/php-app-cronjob
 
 # Application
 COPY . /var/www/
+COPY ./conf/cmd.sh /
 
 # fix permissions
 RUN chown -R www-data:www-data /var/www/
 
 EXPOSE 80
 
-CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
+ENTRYPOINT ["/bin/bash", "/cmd.sh"]
