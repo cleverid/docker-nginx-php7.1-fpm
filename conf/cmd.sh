@@ -10,7 +10,7 @@ sed -i -e "s/worker_processes.*/worker_processes $procs;/" /etc/nginx/nginx.conf
 
 # Again set the right permissions (needed when mounting from a volume)
 set +e
-chown -Rf root:root $NGINX_ROOT
+#chown -Rf root:root $NGINX_ROOT
 set -e
 
 # Start supervisord and services
